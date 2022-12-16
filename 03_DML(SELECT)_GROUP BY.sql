@@ -105,3 +105,56 @@ HAVING ROUND(AVG(SALARY)) <=3500000;
     
 */
 
+--------------------------------------------------------------------------------
+
+/*
+    <집합 연산자 SET OPERATOR>
+    
+    여러개의 쿼리문을 가지고 하나의 쿼리문으로 만드는 연산자 
+    
+    - UNION(합집합) : 두 쿼리문을 수행한 결과값을 더한 후 중복되는 부분은 한번만 빼서 중복을 제거한 것 => OR
+    - UNION ALL : 두 쿼리문을 수행한 결과값을 더한 후 중복 제거를 하지 않은 것 => 합집합 + 교집합
+    - INTERSECT (교집합) : 두 쿼리문을 수행한 결과값의 중복된 부분 => AND
+    - MINUS (차집합) : 선행 쿼리문 결과값에서 후행 쿼리문 결과값을 뺀 나머지 부분
+                     => 선행 쿼리문 결과값 - 교집합 1
+    주의해야 할 점 : 두 쿼리문의 결과를 합쳐서 한개의 테이블로 보여줘야 하기 때문에 두 쿼리문의 SELECT 절 부분은 같아야 한다.
+                  즉 조회할 "컬럼"이 동일해야 한다.
+*/
+
+-- 1. UNION(합집합) : 두 쿼리문을 수행한 결과값을 더하지만 중복은 제거.
+
+-- 부서코드가 D5이거나 또는 급여가 300만원 초과인 사원들 조회 (사번, 사원명, 부서코드, 급여)
+
+SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5' --6명
+UNION
+SELECT EMP_ID, EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000; -- 8명
+
+
+-- 직급코드가 J6이거나 또는 부서코드가 D1인 사원들을 조회 (사번, 사원명, 부서코드, 직급코드 ) => UNION
+
+SELECT EMP_ID, EMP_NAME, DEPT_CODE, JOB_CODE
+FROM EMPLOYEE
+WHERE JOB_CODE = 'J6'
+UNION
+SELECT EMP_ID, EMP_NAME, DEPT_CODE, JOB_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D1';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -300,7 +300,7 @@ SELECT SYSDATE FROM DUAL;
 -- 1. MONTHS_BETWEEN(DATA1, DATA2) : 두 날짜 사이의 개월수를 반환(결과값은 NUMBER)
 -- DATE2가 미래일경우 음수가 나옴.
 
--- 각 직원별 근무일수, 근무 개월수
+-- 각 직원별 근무일수, 근무 개월수   
 SELECT EMP_NAME,
        FLOOR(SYSDATE - HIRE_DATE) || '일' 근무일수,
        FLOOR(ABS(MONTHS_BETWEEN(HIRE_DATE, SYSDATE))) || '개월' 근무개월수
@@ -673,10 +673,6 @@ SELECT COUNT(DEPT_CODE)
 FROM EMPLOYEE;
 
 -- 부서배치가 완료된 여자 사원 수 
-SELECT COUNT(DEPT_CODE)
-FROM EMPLOYEE
-WHERE SUBSTR(EMP_NO,8,1) = '2';
-
 SELECT COUNT(DEPT_CODE)
 FROM EMPLOYEE
 WHERE SUBSTR(EMP_NO,8,1) = '2';
